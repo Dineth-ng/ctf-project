@@ -1,0 +1,12 @@
+{
+  "name": "ctf-project",
+  "version": "1.0.0",
+  "description": "Operation NightHawk CTF Platform",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": ["ctf", "cybersecurity"],
+  "author": "",
+  "license": "ISC"
+}

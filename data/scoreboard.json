@@ -1,0 +1,33 @@
+{
+  "teams": [
+    {
+      "team_name": "hackerOne",
+      "total_score": 1500,
+      "completed_count": 6,
+      "total_time": "00:02:33",
+      "total_seconds": 153,
+      "is_finished": true,
+      "stage_times": {
+        "1": "00:00:22",
+        "2": "00:01:26",
+        "3": "00:01:44",
+        "4": "00:02:05",
+        "5": "00:02:23",
+        "6": "00:02:33"
+      },
+      "registered_at": "2026-09-24T22:09:54.314711",
+      "last_updated": "2026-09-24T22:12:29.085728"
+    },
+    {
+      "team_name": "Utto",
+      "total_score": 2000,
+      "completed_count": 0,
+      "total_time": "00:00:00",
+      "total_seconds": 0,
+      "is_finished": false,
+      "stage_times": {},
+      "registered_at": "2026-09-24T22:17:57.026342",
+      "last_updated": "2026-09-24T22:17:57.026348"
+    }
+  ]
+}

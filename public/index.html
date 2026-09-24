@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operation NightHawk | CTF Briefing</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <span class="dot"></span>
+        Operation NightHawk
+      </a>
+
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="scoreboard.html">Scoreboard</a>
+        <a href="#about">About</a>
+        <button type="button" class="start-btn" onclick="startWithTeamName()">Start Challenges</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-container">
+    <div class="briefing-card" id="about">
+      <span class="stage-badge">CTF Briefing</span>
+      <h1>Operation NightHawk</h1>
+      <p class="subtitle">Incident investigation scenario &bull; Trainee orientation document</p>
+
+      <div class="briefing-content">
+        <p>
+          <strong>NexaCore Dynamics</strong> is a fictional technology research company developing an advanced
+          autonomous cybersecurity system called <strong>Project Prometheus</strong>.
+        </p>
+
+        <div class="alert-box">
+          <p>
+            <strong>Incident Alert:</strong> A threat-actor group known as <strong>GhostByte</strong> has compromised
+            NexaCore's network, claiming to have stolen source code and internal data related to Project Prometheus with
+            a 48-hour deadline.
+          </p>
+        </div>
+
+        <p>
+          Participants act as <strong>Junior Penetration Testers</strong> and <strong>Threat Hunter trainees</strong> to
+          investigate the attack and trace GhostByte's activities.
+        </p>
+
+        <p>
+          The investigation covers <strong>6 progressive stages</strong>: OSINT discovery, cryptography decryption, web
+          portal bypass, packet capture analysis, Linux escalation, and Prometheus vault decryption.
+        </p>
+
+        <div class="objective-box">
+          <h2>Final Objective</h2>
+          <p>
+            Reach the <strong>Prometheus Vault</strong>, investigate the system, and submit the final flag to complete
+            the mission.
+          </p>
+        </div>
+
+        <!-- Team Name Input Form -->
+        <div>
+          <div class="team-input-group">
+            <input type="text" id="team-name-input" placeholder="Enter your team name (Required)" class="team-name" autocomplete="off" onkeydown="handleTeamKey(event)">
+            <button type="button" class="start-link-btn" onclick="startWithTeamName()">Go to Challenges &rarr;</button>
+          </div>
+          <p id="team-error" class="team-error-msg">Please enter a team name before starting the challenge.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>Operation NightHawk &bull; NexaCore Dynamics CTF Exercise</p>
+  </footer>
+
+  <!-- Script for Team Name Validation -->
+  <script>
+    const teamInput = document.getElementById('team-name-input');
+    const teamError = document.getElementById('team-error');
+
+    // Pre-fill existing team name if already stored
+    const savedTeam = localStorage.getItem('ctf_team_name');
+    if (savedTeam && teamInput) {
+      teamInput.value = savedTeam;
+    }
+
+    // Clear error on input
+    teamInput.addEventListener('input', () => {
+      teamInput.classList.remove('input-error');
+      teamError.style.display = 'none';
+    });
+
+    // Press Enter to submit team name
+    function handleTeamKey(event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        startWithTeamName();
+      }
+    }
+
+    // Validation & backend registration function
+    async function startWithTeamName() {
+      const teamName = teamInput.value.trim();
+
+      if (!teamName) {
+        teamInput.classList.add('input-error');
+        teamError.textContent = 'Please enter a team name before starting the challenge.';
+        teamError.style.display = 'block';
+        teamInput.focus();
+        return;
+      }
+
+      // Save locally as immediate fallback
+      localStorage.setItem('ctf_team_name', teamName);
+
+      try {
+        // Send team registration to Node.js backend
+        const response = await fetch('/api/start', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ teamName })
+        });
+
+        const data = await response.json();
+
+        if (data.success && data.redirectUrl) {
+          window.location.href = data.redirectUrl;
+        } else {
+          // Direct fallback redirection
+          window.location.href = `./challenge.html?team=${encodeURIComponent(teamName)}`;
+        }
+      } catch (err) {
+        // Fallback for static browser preview without running server
+        console.log('Backend request handled offline/statically:', err);
+        window.location.href = `./challenge.html?team=${encodeURIComponent(teamName)}`;
+      }
+    }
+  </script>
+
+</body>
+
+</html>

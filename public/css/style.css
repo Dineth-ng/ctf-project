@@ -1,0 +1,773 @@
+/* ==========================================================================
+   Operation NightHawk - Mobile-First Clean & Responsive Styles
+   ========================================================================== */
+
+/* Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f8fafc;
+  color: #1e293b;
+  line-height: 1.6;
+  padding-bottom: 50px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   Navigation Bar (Mobile Friendly)
+   ========================================================================== */
+header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.nav-container {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.nav-brand {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.nav-brand .dot {
+  width: 9px;
+  height: 9px;
+  background-color: #2563eb;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Header Elements Group */
+.header-meta-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.team-tag {
+  background-color: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e40af;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.team-tag strong {
+  color: #1d4ed8;
+}
+
+.timer-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #475569;
+  white-space: nowrap;
+}
+
+.timer-box span#timer-clock {
+  font-family: Consolas, Monaco, monospace;
+  color: #0f172a;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+/* Navigation Links & Buttons */
+nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: #475569;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background-color 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+nav a:hover {
+  background-color: #f1f5f9;
+  color: #0f172a;
+}
+
+nav a.active-link {
+  color: #2563eb;
+  font-weight: 600;
+  background-color: #eff6ff;
+}
+
+.start-btn {
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  padding: 7px 14px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.start-btn:hover {
+  background-color: #1d4ed8;
+}
+
+.start-btn.active {
+  background-color: #15803d;
+  cursor: default;
+}
+
+.finish-btn {
+  background-color: #16a34a;
+  color: #ffffff;
+  border: none;
+  padding: 7px 14px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.finish-btn:hover {
+  background-color: #15803d;
+}
+
+/* ==========================================================================
+   Main Container
+   ========================================================================== */
+.main-container {
+  max-width: 900px;
+  margin: 24px auto;
+  padding: 0 16px;
+}
+
+/* Alert Banners */
+.status-banner {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.status-banner.info {
+  background-color: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1d4ed8;
+}
+
+.status-banner.success {
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #15803d;
+}
+
+.status-banner.error {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+}
+
+/* ==========================================================================
+   Challenge Cards List
+   ========================================================================== */
+.challenges-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.challenge-card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.card-title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.stage-badge {
+  background-color: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #dbeafe;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 7px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.challenge-title {
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.status-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.status-label.active {
+  background-color: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe;
+}
+
+.status-label.locked {
+  background-color: #f8fafc;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+}
+
+.status-label.solved {
+  background-color: #dcfce7;
+  color: #15803d;
+  border: 1px solid #86efac;
+}
+
+.challenge-description {
+  color: #475569;
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+/* Hints (Details Accordion) */
+.hint-box {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.hint-box summary {
+  padding: 8px 12px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #2563eb;
+  cursor: pointer;
+  user-select: none;
+}
+
+.hint-box summary:hover {
+  background-color: #f1f5f9;
+}
+
+.hint-text {
+  padding: 10px 12px;
+  font-size: 0.9rem;
+  color: #475569;
+  border-top: 1px solid #e2e8f0;
+  background-color: #ffffff;
+  line-height: 1.5;
+}
+
+.hint-text code {
+  background-color: #f1f5f9;
+  color: #0f172a;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-family: Consolas, Monaco, monospace;
+}
+
+/* Form Row */
+.form-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.flag-input {
+  flex: 1;
+  padding: 9px 12px;
+  font-size: 0.95rem;
+  font-family: Consolas, Monaco, monospace;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background-color: #ffffff;
+  color: #0f172a;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  min-width: 0;
+}
+
+.flag-input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.submit-btn {
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  padding: 9px 18px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s;
+}
+
+.submit-btn:hover {
+  background-color: #1d4ed8;
+}
+
+.feedback {
+  font-size: 0.88rem;
+  font-weight: 500;
+  min-height: 18px;
+}
+
+.feedback.success { color: #16a34a; }
+.feedback.error { color: #dc2626; }
+
+/* Locked & Solved States */
+.challenge-card.locked {
+  opacity: 0.7;
+  background-color: #fafbfc;
+}
+
+.challenge-card.locked .flag-input {
+  background-color: #f1f5f9;
+  border-color: #e2e8f0;
+  cursor: not-allowed;
+  color: #64748b;
+}
+
+.challenge-card.locked .submit-btn {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+}
+
+.challenge-card.solved {
+  border-color: #86efac;
+  background-color: #f0fdf4;
+}
+
+.challenge-card.solved .stage-badge {
+  background-color: #dcfce7;
+  color: #15803d;
+  border-color: #bbf7d0;
+}
+
+.challenge-card.solved .flag-input {
+  background-color: #ffffff;
+  border-color: #86efac;
+  color: #15803d;
+}
+
+.challenge-card.solved .submit-btn {
+  background-color: #16a34a;
+  cursor: default;
+}
+
+/* ==========================================================================
+   Briefing & Team Registration Page
+   ========================================================================== */
+.briefing-card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.briefing-card h1 {
+  font-size: 1.85rem;
+  color: #0f172a;
+  margin: 8px 0 6px 0;
+  letter-spacing: -0.02em;
+}
+
+.briefing-card .subtitle {
+  color: #64748b;
+  font-size: 0.95rem;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.briefing-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-size: 0.98rem;
+  color: #334155;
+}
+
+.alert-box {
+  background-color: #fef3c7;
+  border-left: 4px solid #f59e0b;
+  padding: 12px 16px;
+  border-radius: 0 6px 6px 0;
+  color: #92400e;
+}
+
+.objective-box {
+  background-color: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.objective-box h2 {
+  font-size: 1.05rem;
+  color: #1d4ed8;
+  margin-bottom: 6px;
+}
+
+.team-input-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.team-name {
+  flex: 1;
+  min-width: 220px;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background-color: #ffffff;
+  color: #0f172a;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.team-name:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.team-name.input-error {
+  border-color: #dc2626;
+  background-color: #fef2f2;
+}
+
+.team-error-msg {
+  color: #dc2626;
+  font-size: 0.88rem;
+  font-weight: 500;
+  margin-top: 6px;
+  display: none;
+}
+
+.start-link-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2563eb;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+
+.start-link-btn:hover {
+  background-color: #1d4ed8;
+}
+
+/* ==========================================================================
+   Scoreboard Table Styles
+   ========================================================================== */
+.scoreboard-stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.stat-card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 14px 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stat-card-title {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #64748b;
+  letter-spacing: 0.04em;
+}
+
+.stat-card-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #0f172a;
+  font-family: Consolas, Monaco, monospace;
+}
+
+.table-container {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  overflow-x: auto;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.scoreboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.92rem;
+  min-width: 600px;
+}
+
+.scoreboard-table th {
+  background-color: #f8fafc;
+  color: #475569;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 12px 14px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.scoreboard-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #334155;
+  vertical-align: middle;
+}
+
+.scoreboard-table tr:hover {
+  background-color: #f8fafc;
+}
+
+.rank-cell {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.finish-tag {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 0.72rem;
+  background-color: #dcfce7;
+  color: #15803d;
+  border: 1px solid #86efac;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.score-cell strong {
+  color: #2563eb;
+  font-size: 1rem;
+  font-family: Consolas, monospace;
+}
+
+.time-cell code {
+  font-family: Consolas, Monaco, monospace;
+  font-weight: 600;
+  color: #0f172a;
+  background-color: #f1f5f9;
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+
+.progress-tag {
+  background-color: #eff6ff;
+  color: #2563eb;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.solved-tag {
+  background-color: #dcfce7;
+  color: #15803d;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  font-size: 0.82rem;
+  color: #64748b;
+  margin-top: 40px;
+}
+
+/* ==========================================================================
+   Mobile Phone Responsive Breakpoints
+   ========================================================================== */
+@media (max-width: 768px) {
+  .nav-container {
+    padding: 10px 16px;
+    gap: 10px;
+  }
+
+  .briefing-card h1 {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .nav-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .nav-container > div:first-child,
+  .nav-brand {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 6px;
+  }
+
+  nav a {
+    padding: 6px 8px;
+    font-size: 0.85rem;
+  }
+
+  .start-btn, .finish-btn {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+
+  .main-container {
+    margin: 16px auto;
+    padding: 0 12px;
+  }
+
+  .briefing-card {
+    padding: 18px 14px;
+  }
+
+  .challenge-card {
+    padding: 16px 14px;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 11px;
+  }
+
+  .team-input-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .team-name {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .start-link-btn {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .scoreboard-stats-row {
+    grid-template-columns: 1fr;
+  }
+}

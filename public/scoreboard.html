@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operation NightHawk | Live Scoreboard & Leaderboard</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <span class="dot"></span>
+        Operation NightHawk
+      </a>
+
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="challenge.html">Challenges</a>
+        <a href="scoreboard.html" class="active-link">Scoreboard</a>
+        <a href="challenge.html" class="start-btn" style="text-decoration: none;">Resume CTF</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-container">
+
+    <!-- Scoreboard Header Card -->
+    <div class="briefing-card" style="margin-bottom: 20px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+        <div>
+          <span class="stage-badge">Live Rankings</span>
+          <h1>CTF Mission Scoreboard</h1>
+          <p class="subtitle" style="margin-bottom: 0; padding-bottom: 0; border-bottom: none;">
+            Live team standings, challenges solved, elapsed duration, and last submission time.
+          </p>
+        </div>
+
+        <button type="button" class="submit-btn" onclick="fetchScoreboard()">
+          Refresh Rankings
+        </button>
+      </div>
+    </div>
+
+    <!-- Summary Stats Row -->
+    <div class="scoreboard-stats-row">
+      <div class="stat-card">
+        <span class="stat-card-title">Registered Teams</span>
+        <span class="stat-card-value" id="stat-total-teams">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card-title">Top Score</span>
+        <span class="stat-card-value" id="stat-top-score">0 PTS</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card-title">Completed Operations</span>
+        <span class="stat-card-value" id="stat-completed-ops">0</span>
+      </div>
+    </div>
+
+    <!-- Leaderboard Table Container -->
+    <div class="table-container">
+      <table class="scoreboard-table">
+        <thead>
+          <tr>
+            <th style="width: 80px;">Rank</th>
+            <th>Team Name</th>
+            <th style="width: 120px;">Solved</th>
+            <th style="width: 130px;">Score</th>
+            <th style="width: 140px;">Total Time</th>
+            <th style="width: 160px;">Last Submit Time</th>
+          </tr>
+        </thead>
+        <tbody id="scoreboard-body">
+          <tr>
+            <td colspan="6" style="text-align: center; padding: 25px; color: #64748b;">
+              Loading leaderboard rankings...
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>Operation NightHawk &bull; NexaCore Dynamics CTF Exercise &bull; Scoreboard Telemetry</p>
+  </footer>
+
+  <!-- JavaScript to Fetch & Render Scoreboard -->
+  <script>
+    async function fetchScoreboard() {
+      const tbody = document.getElementById('scoreboard-body');
+
+      try {
+        const response = await fetch('/api/scoreboard');
+        const data = await response.json();
+        const teams = data.scoreboard || [];
+
+        // Update summary cards
+        document.getElementById('stat-total-teams').textContent = teams.length;
+        
+        const topScore = teams.length > 0 ? Math.max(...teams.map(t => t.total_score || 0)) : 0;
+        document.getElementById('stat-top-score').textContent = `${topScore} PTS`;
+
+        const completedCount = teams.filter(t => t.is_finished || t.completed_count >= 6).length;
+        document.getElementById('stat-completed-ops').textContent = completedCount;
+
+        if (teams.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="6" style="text-align: center; padding: 35px; color: #64748b;">
+                No teams have registered or submitted flags yet. <br>
+                <a href="index.html" style="color: #2563eb; font-weight: 600; text-decoration: none; margin-top: 8px; display: inline-block;">
+                  Start the CTF to be #1 on the scoreboard!
+                </a>
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        // Render ranked rows
+        let rowsHtml = '';
+        teams.forEach((team, index) => {
+          const rank = index + 1;
+          let rankBadge = `#${rank}`;
+          if (rank === 1) rankBadge = '1st';
+          else if (rank === 2) rankBadge = '2nd';
+          else if (rank === 3) rankBadge = '3rd';
+
+          const isDone = team.completed_count >= 6;
+          const statusClass = isDone ? 'solved-tag' : 'progress-tag';
+
+          // Format last submit time
+          let lastTimeFormatted = '--:--';
+          if (team.last_updated) {
+            try {
+              const d = new Date(team.last_updated);
+              lastTimeFormatted = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            } catch (e) {
+              lastTimeFormatted = team.total_time || '--:--';
+            }
+          }
+
+          rowsHtml += `
+            <tr>
+              <td class="rank-cell">
+                <span class="rank-badge">${rankBadge}</span>
+              </td>
+              <td class="team-cell">
+                <strong>${escapeHtml(team.team_name)}</strong>
+                ${isDone ? '<span class="finish-tag">Completed</span>' : ''}
+              </td>
+              <td>
+                <span class="${statusClass}">
+                  ${team.completed_count || 0} / 6
+                </span>
+              </td>
+              <td class="score-cell">
+                <strong>${team.total_score || 0}</strong> PTS
+              </td>
+              <td class="time-cell">
+                <code>${team.total_time || '00:00:00'}</code>
+              </td>
+              <td class="time-cell">
+                <code>${lastTimeFormatted}</code>
+              </td>
+            </tr>
+          `;
+        });
+
+        tbody.innerHTML = rowsHtml;
+
+      } catch (err) {
+        console.error('Error fetching scoreboard:', err);
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" style="text-align: center; padding: 25px; color: #dc2626;">
+              Unable to load live scoreboard. (Server offline).
+            </td>
+          </tr>
+        `;
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    // Initial load + auto-refresh every 5 seconds
+    fetchScoreboard();
+    setInterval(fetchScoreboard, 5000);
+  </script>
+
+</body>
+
+</html>

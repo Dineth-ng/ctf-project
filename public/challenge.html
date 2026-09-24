@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operation NightHawk | CTF Challenges</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <span class="dot"></span>
+        Operation NightHawk
+      </a>
+
+      <!-- Team Name Display -->
+      <div id="team-display" class="team-tag" style="display: none;">
+        <span>Team:</span>
+        <strong id="team-name-label"></strong>
+      </div>
+
+      <!-- Timer -->
+      <div id="mission-timer" class="timer-box" style="display: none;">
+        <span>Time:</span>
+        <span id="timer-clock">00:00:00</span>
+      </div>
+
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="scoreboard.html">Scoreboard</a>
+        <a href="index.html#about">About</a>
+        <button id="start-btn" class="start-btn">Start Mission</button>
+        <button id="finish-btn" class="finish-btn" onclick="finishAndGoToScoreboard()">Finish</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-container">
+
+    <!-- Notification Banner -->
+    <div id="status-bar" class="status-banner info" style="display: none;"></div>
+
+    <!-- Challenges List -->
+    <div class="challenges-list">
+
+      <!-- Challenge 1 -->
+      <div class="challenge-card" id="challenge-1" data-flag="NH{public_osint_leak}">
+        <div class="card-header">
+          <div class="card-title-group">
+            <span class="stage-badge">Stage 01</span>
+            <h2 class="challenge-title">1. OSINT & Public Intelligence</h2>
+          </div>
+          <span class="status-label active" id="status-1">Active</span>
+        </div>
+
+        <p class="challenge-description">
+          Inspect the company's public records or employee profiles for exposed initial access secrets.
+        </p>
+
+        <details class="hint-box">
+          <summary>Need a hint?</summary>
+          <div class="hint-text">
+            Check public repositories and commit logs for leaked keys or emails.
+          </div>
+        </details>
+
+        <div class="form-row">
+          <input type="text" class="flag-input" placeholder="NH{flag_text}" autocomplete="off" onkeydown="handleEnter(event, 1)">
+          <button type="button" class="submit-btn" onclick="verifyFlag(1)">Submit Flag</button>
+        </div>
+        <p class="feedback" id="feedback-1"></p>
+      </div>
+
+      <!-- Challenge 2 -->
+      <div class="challenge-card locked" id="challenge-2" data-flag="NH{cipher_stream_decoded}">
+        <div class="card-header">
+          <div class="card-title-group">
+            <span class="stage-badge">Stage 02</span>
+            <h2 class="challenge-title">2. Hidden Messages & Decryption</h2>
+          </div>
+          <span class="status-label locked" id="status-2">Locked</span>
+        </div>
+
+        <p class="challenge-description">
+          Find and decode hidden cryptographic messages and strings in metadata.
+        </p>
+
+        <details class="hint-box">
+          <summary>Need a hint?</summary>
+          <div class="hint-text">
+            Look for Base64 and rot13 encoded strings inside image metadata.
+          </div>
+        </details>
+
+        <div class="form-row">
+          <input type="text" class="flag-input" placeholder="Locked - Solve Challenge 1" disabled autocomplete="off" onkeydown="handleEnter(event, 2)">
+          <button type="button" class="submit-btn" disabled onclick="verifyFlag(2)">Submit Flag</button>
+        </div>
+        <p class="feedback" id="feedback-2"></p>
+      </div>
+
+      <!-- Challenge 3 -->
+      <div class="challenge-card locked" id="challenge-3" data-flag="NH{sql_bypass_prom_auth}">
+        <div class="card-header">
+          <div class="card-title-group">
+            <span class="stage-badge">Stage 03</span>
+            <h2 class="challenge-title">3. Vulnerable Web Portal</h2>
+          </div>
+          <span class="status-label locked" id="status-3">Locked</span>
+        </div>
+
+        <p class="challenge-description">
+          Test the authentication form of the staging portal for vulnerabilities.
+        </p>
+
+        <details class="hint-box">
+          <summary>Need a hint?</summary>
+          <div class="hint-text">
+            The login form uses string interpolation. Try a SQL injection payload.
+          </div>
+        </details>
+
+        <div class="form-row">
+          <input type="text" class="flag-input" placeholder="Locked - Solve Challenge 2" disabled autocomplete="off" onkeydown="handleEnter(event, 3)">
+          <button type="button" class="submit-btn" disabled onclick="verifyFlag(3)">Submit Flag</button>
+        </div>
+        <p class="feedback" id="feedback-3"></p>
+      </div>
+
+      <!-- Challenge 4 -->
+      <div class="challenge-card locked" id="challenge-4" data-flag="NH{pcap_exfiltrated_stream}">
+        <div class="card-header">
+          <div class="card-title-group">
+            <span class="stage-badge">Stage 04</span>
+            <h2 class="challenge-title">4. Network Traffic & PCAP Forensics</h2>
+          </div>
+          <span class="status-label locked" id="status-4">Locked</span>
+        </div>
+
+        <p class="challenge-description">
+          Inspect network packets to locate leaked data sent over DNS or ICMP.
+        </p>
+
+        <details class="hint-box">
+          <summary>Need a hint?</summary>
+          <div class="hint-text">
+            Analyze unusual DNS queries and large ICMP payload packets in Wireshark.
+          </div>
+        </details>
+
+        <div class="form-row">
+          <input type="text" class="flag-input" placeholder="Locked - Solve Challenge 3" disabled autocomplete="off" onkeydown="handleEnter(event, 4)">
+          <button type="button" class="submit-btn" disabled onclick="verifyFlag(4)">Submit Flag</button>
+        </div>
+        <p class="feedback" id="feedback-4"></p>
+      </div>
+
+      <!-- Challenge 5 -->
+      <div class="challenge-card locked" id="challenge-5" data-flag="NH{privesc_suid_root_access}">
+        <div class="card-header">
+          <div class="card-title-group">
+            <span class="stage-badge">Stage 05</span>
+            <h2 class="challenge-title">5. Protected Linux Host Escalation</h2>
+          </div>
+          <span class="status-label locked" id="status-5">Locked</span>
+        </div>
+
+        <p class="challenge-description">
+          Escalate your privileges on the simulated Linux system to gain root access.
+        </p>
+
+        <details class="hint-box">
+          <summary>Need a hint?</summary>
+          <div class="hint-text">
+            Search for binaries with unusual SUID permissions using <code>find / -perm -4000</code>.
+          </div>
+        </details>
+
+        <div class="form-row">
+          <input type="text" class="flag-input" placeholder="Locked - Solve Challenge 4" disabled autocomplete="off" onkeydown="handleEnter(event, 5)">
+          <button type="button" class="submit-btn" disabled onclick="verifyFlag(5)">Submit Flag</button>
+        </div>
+        <p class="feedback" id="feedback-5"></p>
+      </div>
+
+      <!-- Challenge 6 -->
+      <div class="challenge-card locked" id="challenge-6" data-flag="NH{prometheus_core_vault_unlocked}">
+        <div class="card-header">
+          <div class="card-title-group">
+            <span class="stage-badge">Stage 06</span>
+            <h2 class="challenge-title">6. Prometheus Vault Recovery</h2>
+          </div>
+          <span class="status-label locked" id="status-6">Locked</span>
+        </div>
+
+        <p class="challenge-description">
+          Use the keys collected from previous stages to decrypt the final vault.
+        </p>
+
+        <details class="hint-box">
+          <summary>Need a hint?</summary>
+          <div class="hint-text">
+            Combine the cipher key from Stage 2 with the root hash from Stage 5.
+          </div>
+        </details>
+
+        <div class="form-row">
+          <input type="text" class="flag-input" placeholder="Locked - Solve Challenge 5" disabled autocomplete="off" onkeydown="handleEnter(event, 6)">
+          <button type="button" class="submit-btn" disabled onclick="verifyFlag(6)">Submit Flag</button>
+        </div>
+        <p class="feedback" id="feedback-6"></p>
+      </div>
+
+      <!-- Finish CTF Card Section -->
+      <div class="challenge-card" id="finish-mission-card" style="background-color: #f0fdf4; border: 1px solid #bbf7d0; text-align: center; padding: 24px; margin-top: 10px;">
+        <h2 style="color: #15803d; font-size: 1.2rem; margin-bottom: 6px;">Finish Mission & View Standings</h2>
+        <p style="color: #475569; font-size: 0.95rem; margin-bottom: 16px;">
+          Completed your challenges or ready to submit? Click below to record your final completion time and check the live scoreboard rankings.
+        </p>
+        <div>
+          <button type="button" class="finish-btn" onclick="finishAndGoToScoreboard()" style="font-size: 0.95rem; padding: 11px 26px; cursor: pointer;">
+            Finish & View Scoreboard &rarr;
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>Operation NightHawk &bull; NexaCore Dynamics CTF Exercise</p>
+  </footer>
+
+  <!-- JavaScript Logic -->
+  <script>
+    let timerInterval = null;
+    let secondsElapsed = 0;
+    let missionStarted = false;
+    const totalChallenges = 6;
+
+    const startBtn = document.getElementById('start-btn');
+    const timerDisplay = document.getElementById('mission-timer');
+    const timerClock = document.getElementById('timer-clock');
+    const statusBar = document.getElementById('status-bar');
+
+    // Check Team Name on page load
+    const urlParams = new URLSearchParams(window.location.search);
+    let teamName = urlParams.get('team') || localStorage.getItem('ctf_team_name');
+
+    if (!teamName || !teamName.trim()) {
+      alert('Team name required! Please enter your team name on the home page first.');
+      window.location.href = 'index.html';
+    } else {
+      localStorage.setItem('ctf_team_name', teamName);
+      const teamDisplay = document.getElementById('team-display');
+      const teamLabel = document.getElementById('team-name-label');
+      if (teamDisplay && teamLabel) {
+        teamLabel.textContent = teamName;
+        teamDisplay.style.display = 'inline-flex';
+      }
+    }
+
+    // Press Enter to submit
+    function handleEnter(event, index) {
+      if (event.key === 'Enter') {
+        verifyFlag(index);
+      }
+    }
+
+    // Start Mission button click
+    startBtn.addEventListener('click', () => {
+      if (missionStarted) return;
+      
+      missionStarted = true;
+      startBtn.textContent = 'Mission Active';
+      startBtn.classList.add('active');
+      timerDisplay.style.display = 'inline-flex';
+
+      showBanner('Mission initiated. Challenge 1 is ready for investigation.', 'info');
+
+      // Focus first input
+      const firstInput = document.querySelector('#challenge-1 .flag-input');
+      if (firstInput) firstInput.focus();
+
+      // Start timer
+      timerInterval = setInterval(() => {
+        secondsElapsed++;
+        const hrs = String(Math.floor(secondsElapsed / 3600)).padStart(2, '0');
+        const mins = String(Math.floor((secondsElapsed % 3600) / 60)).padStart(2, '0');
+        const secs = String(secondsElapsed % 60).padStart(2, '0');
+        timerClock.textContent = `${hrs}:${mins}:${secs}`;
+      }, 1000);
+    });
+
+    // Verify submitted flag with Backend
+    async function verifyFlag(stepIndex) {
+      if (!missionStarted) {
+        showBanner('Please click "Start Mission" in the top bar first.', 'error');
+        return;
+      }
+
+      const card = document.getElementById(`challenge-${stepIndex}`);
+      const input = card.querySelector('.flag-input');
+      const submittedFlag = input.value.trim();
+      const expectedFlag = card.dataset.flag ? card.dataset.flag.trim() : '';
+      const feedback = document.getElementById(`feedback-${stepIndex}`);
+      const statusLabel = document.getElementById(`status-${stepIndex}`);
+
+      if (!submittedFlag) {
+        feedback.className = 'feedback error';
+        feedback.textContent = 'Please enter a flag before submitting.';
+        return;
+      }
+
+      let isCorrect = false;
+      let serverMessage = '';
+
+      try {
+        const currentTime = timerClock.textContent || '00:00:00';
+        const response = await fetch('/api/verify-flag', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            stage: stepIndex,
+            flag: submittedFlag,
+            teamName: localStorage.getItem('ctf_team_name') || '',
+            timeElapsed: currentTime,
+            secondsElapsed: secondsElapsed
+          })
+        });
+
+        const data = await response.json();
+        isCorrect = data.success;
+        serverMessage = data.message;
+      } catch (err) {
+        console.log('Backend request fallback to local validation:', err);
+        isCorrect = (submittedFlag === expectedFlag);
+        serverMessage = isCorrect ? 'Correct flag! Stage cleared.' : 'Incorrect flag. Check your answer and try again.';
+      }
+
+      if (isCorrect) {
+        // Mark current as solved
+        card.classList.remove('locked');
+        card.classList.add('solved');
+        input.disabled = true;
+        
+        const btn = card.querySelector('.submit-btn');
+        btn.disabled = true;
+        btn.textContent = 'Solved';
+
+        statusLabel.className = 'status-label solved';
+        statusLabel.textContent = 'Solved';
+
+        feedback.className = 'feedback success';
+        feedback.textContent = serverMessage || 'Correct flag! Stage cleared.';
+
+        // Unlock next challenge
+        const nextStepIndex = stepIndex + 1;
+        if (nextStepIndex <= totalChallenges) {
+          const nextCard = document.getElementById(`challenge-${nextStepIndex}`);
+          nextCard.classList.remove('locked');
+          
+          const nextStatus = document.getElementById(`status-${nextStepIndex}`);
+          nextStatus.className = 'status-label active';
+          nextStatus.textContent = 'Active';
+
+          const nextInput = nextCard.querySelector('.flag-input');
+          const nextBtn = nextCard.querySelector('.submit-btn');
+          
+          nextInput.disabled = false;
+          nextInput.placeholder = 'NH{flag_text}';
+          nextBtn.disabled = false;
+
+          showBanner(`Stage 0${stepIndex} complete in ${timerClock.textContent}. Stage 0${nextStepIndex} is now unlocked.`, 'success');
+          
+          setTimeout(() => {
+            nextInput.focus();
+            nextCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 200);
+        } else {
+          // All solved
+          clearInterval(timerInterval);
+          showBanner(`
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; width: 100%; gap: 10px;">
+              <span><strong>Congratulations!</strong> You completed all 6 challenges in ${timerClock.textContent}!</span>
+              <a href="scoreboard.html" class="start-btn" style="text-decoration: none; padding: 6px 14px; font-size: 0.88rem;">View Scoreboard</a>
+            </div>
+          `, 'success');
+        }
+      } else {
+        feedback.className = 'feedback error';
+        feedback.textContent = serverMessage || 'Incorrect flag. Check your answer and try again.';
+      }
+    }
+
+    function showBanner(message, type) {
+      statusBar.innerHTML = message;
+      statusBar.className = `status-banner ${type}`;
+      statusBar.style.display = 'block';
+    }
+
+    // Finish Mission and Go to Scoreboard
+    function finishAndGoToScoreboard() {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+      }
+      const currentTime = timerClock ? timerClock.textContent : '00:00:00';
+      localStorage.setItem('ctf_final_time', currentTime);
+      window.location.href = 'scoreboard.html';
+    }
+  </script>
+</body>
+</html>
