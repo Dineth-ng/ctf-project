@@ -191,8 +191,8 @@ nav a.active-link {
 }
 
 .challenge-page-grid {
-  display: grid;
-  grid-template-columns: 330px 1fr;
+  display: flex;
+  justify-content: center;
   gap: 24px;
   align-items: start;
 }
@@ -201,11 +201,19 @@ nav a.active-link {
    Left Sidebar: Target Environment & Intel Help
    ========================================================================== */
 .intel-sidebar {
+  width: 320px;
+  flex-shrink: 0;
   position: sticky;
   top: 75px;
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+.challenges-stream-column {
+  flex: 1;
+  min-width: 0;
+  max-width: 800px;
 }
 
 .intel-card {

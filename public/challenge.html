@@ -46,8 +46,8 @@
 
     <div class="challenge-page-grid">
 
-      <!-- Left Sidebar: Target Environment & Hacking Help -->
-      <aside class="intel-sidebar">
+      <!-- Left Sidebar: Target Environment & Hacking Help (Hidden until Start Mission) -->
+      <aside class="intel-sidebar" id="intel-sidebar" style="display: none;">
 
         <!-- Target Environment Card -->
         <div class="intel-card">
@@ -404,6 +404,12 @@
       startBtn.textContent = 'Mission Active';
       startBtn.classList.add('active');
       timerDisplay.style.display = 'inline-flex';
+
+      // Show Target Environment & Testing Mode sidebar after mission start
+      const intelSidebar = document.getElementById('intel-sidebar');
+      if (intelSidebar) {
+        intelSidebar.style.display = 'flex';
+      }
 
       showBanner('Mission initiated. Challenge 1 is ready for investigation.', 'info');
 
