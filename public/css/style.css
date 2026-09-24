@@ -19,7 +19,7 @@ body {
 }
 
 /* ==========================================================================
-   Navigation Bar (Mobile Friendly)
+   Navigation Bar
    ========================================================================== */
 header {
   background-color: #ffffff;
@@ -31,7 +31,7 @@ header {
 }
 
 .nav-container {
-  max-width: 1050px;
+  max-width: 1180px;
   margin: 0 auto;
   padding: 12px 20px;
   display: flex;
@@ -60,14 +60,7 @@ header {
   display: inline-block;
 }
 
-/* Header Elements Group */
-.header-meta-group {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
+/* Team Badge & Timer */
 .team-tag {
   background-color: #eff6ff;
   border: 1px solid #bfdbfe;
@@ -107,7 +100,7 @@ header {
   font-weight: 700;
 }
 
-/* Navigation Links & Buttons */
+/* Navigation Links */
 nav {
   display: flex;
   align-items: center;
@@ -185,7 +178,7 @@ nav a.active-link {
 }
 
 /* ==========================================================================
-   Main Container
+   Main Containers & 2-Column Grid
    ========================================================================== */
 .main-container {
   max-width: 900px;
@@ -193,7 +186,123 @@ nav a.active-link {
   padding: 0 16px;
 }
 
-/* Alert Banners */
+.main-container.wide-layout {
+  max-width: 1180px;
+}
+
+.challenge-page-grid {
+  display: grid;
+  grid-template-columns: 330px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* ==========================================================================
+   Left Sidebar: Target Environment & Intel Help
+   ========================================================================== */
+.intel-sidebar {
+  position: sticky;
+  top: 75px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.intel-card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.intel-card-header {
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.intel-card-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.intel-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  background-color: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.intel-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.intel-label {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.intel-value {
+  font-family: Consolas, Monaco, monospace;
+  font-size: 0.88rem;
+  color: #0f172a;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 6px 9px;
+  border-radius: 5px;
+  word-break: break-all;
+}
+
+.intel-link {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.intel-link:hover {
+  text-decoration: underline;
+}
+
+.help-step-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.86rem;
+  color: #334155;
+}
+
+.help-step-list li {
+  background-color: #f8fafc;
+  border: 1px solid #f1f5f9;
+  padding: 6px 9px;
+  border-radius: 5px;
+  line-height: 1.45;
+}
+
+.help-step-list li strong {
+  color: #0f172a;
+}
+
+/* ==========================================================================
+   Alert Banners & Challenge Cards
+   ========================================================================== */
 .status-banner {
   padding: 12px 16px;
   border-radius: 8px;
@@ -221,9 +330,6 @@ nav a.active-link {
   color: #b91c1c;
 }
 
-/* ==========================================================================
-   Challenge Cards List
-   ========================================================================== */
 .challenges-list {
   display: flex;
   flex-direction: column;
@@ -554,7 +660,7 @@ nav a.active-link {
 }
 
 /* ==========================================================================
-   Scoreboard Table Styles
+   Scoreboard Table Styles (5 Columns)
    ========================================================================== */
 .scoreboard-stats-row {
   display: grid;
@@ -602,7 +708,7 @@ nav a.active-link {
   border-collapse: collapse;
   text-align: left;
   font-size: 0.92rem;
-  min-width: 600px;
+  min-width: 500px;
 }
 
 .scoreboard-table th {
@@ -612,12 +718,12 @@ nav a.active-link {
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  padding: 12px 14px;
+  padding: 12px 16px;
   border-bottom: 1px solid #e2e8f0;
 }
 
 .scoreboard-table td {
-  padding: 12px 14px;
+  padding: 14px 16px;
   border-bottom: 1px solid #f1f5f9;
   color: #334155;
   vertical-align: middle;
@@ -655,7 +761,7 @@ nav a.active-link {
   font-weight: 600;
   color: #0f172a;
   background-color: #f1f5f9;
-  padding: 2px 5px;
+  padding: 3px 6px;
   border-radius: 4px;
 }
 
@@ -686,8 +792,18 @@ footer {
 }
 
 /* ==========================================================================
-   Mobile Phone Responsive Breakpoints
+   Responsive Breakpoints
    ========================================================================== */
+@media (max-width: 960px) {
+  .challenge-page-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .intel-sidebar {
+    position: static;
+  }
+}
+
 @media (max-width: 768px) {
   .nav-container {
     padding: 10px 16px;

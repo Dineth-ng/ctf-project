@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Operation NightHawk | CTF Challenges</title>
   <link rel="stylesheet" href="./css/style.css">
 </head>
+
 <body>
 
   <!-- Navigation Bar -->
@@ -13,19 +15,20 @@
     <div class="nav-container">
       <a href="index.html" class="nav-brand">
         <span class="dot"></span>
-        Operation NightHawk
+        Operation NightHawk (Testing)
       </a>
 
-      <!-- Team Name Display -->
-      <div id="team-display" class="team-tag" style="display: none;">
-        <span>Team:</span>
-        <strong id="team-name-label"></strong>
-      </div>
+      <!-- Header Meta: Team Tag & Timer -->
+      <div class="header-meta-group">
+        <div id="team-display" class="team-tag" style="display: none;">
+          <span>Team:</span>
+          <strong id="team-name-label"></strong>
+        </div>
 
-      <!-- Timer -->
-      <div id="mission-timer" class="timer-box" style="display: none;">
-        <span>Time:</span>
-        <span id="timer-clock">00:00:00</span>
+        <div id="mission-timer" class="timer-box" style="display: none;">
+          <span>Time:</span>
+          <span id="timer-clock">00:00:00</span>
+        </div>
       </div>
 
       <nav>
@@ -38,193 +41,314 @@
     </div>
   </header>
 
-  <!-- Main Container -->
-  <main class="main-container">
+  <!-- Main Container with 2-Column Grid -->
+  <main class="main-container wide-layout">
 
-    <!-- Notification Banner -->
-    <div id="status-bar" class="status-banner info" style="display: none;"></div>
+    <div class="challenge-page-grid">
 
-    <!-- Challenges List -->
-    <div class="challenges-list">
+      <!-- Left Sidebar: Target Environment & Hacking Help -->
+      <aside class="intel-sidebar">
 
-      <!-- Challenge 1 -->
-      <div class="challenge-card" id="challenge-1" data-flag="NH{public_osint_leak}">
-        <div class="card-header">
-          <div class="card-title-group">
-            <span class="stage-badge">Stage 01</span>
-            <h2 class="challenge-title">1. OSINT & Public Intelligence</h2>
+        <!-- Target Environment Card -->
+        <div class="intel-card">
+          <div class="intel-card-header">
+            <h3 class="intel-card-title">Target Environment</h3>
+            <span class="intel-badge">Online</span>
           </div>
-          <span class="status-label active" id="status-1">Active</span>
+
+          <div class="intel-item">
+            <span class="intel-label">Target Website URL</span>
+            <div class="intel-value">
+              <a href="http://10.10.45.188:8080" target="_blank" class="intel-link">http://10.10.45.188:8080</a>
+            </div>
+          </div>
+
+          <!-- <div class="intel-item">
+            <span class="intel-label">Target IP Address</span>
+            <div class="intel-value">
+              <code>10.10.45.188</code>
+            </div>
+          </div>
+
+          <div class="intel-item">
+            <span class="intel-label">SSH Access</span>
+            <div class="intel-value">
+              <code>trainee@10.10.45.188:2222</code>
+            </div>
+          </div>
+
+          <div class="intel-item">
+            <span class="intel-label">Subnet Scope</span>
+            <div class="intel-value">
+              <code>10.10.45.0/24</code>
+            </div>
+          </div> -->
+
         </div>
 
-        <p class="challenge-description">
-          Inspect the company's public records or employee profiles for exposed initial access secrets.
-        </p>
-
-        <details class="hint-box">
-          <summary>Need a hint?</summary>
-          <div class="hint-text">
-            Check public repositories and commit logs for leaked keys or emails.
+        <!-- Hacking Help & Intel Guide -->
+        <div class="intel-card">
+          <div class="intel-card-header">
+            <h3 class="intel-card-title">Testing Mode</h3>
+            <span class="intel-badge">Testing</span>
           </div>
-        </details>
 
-        <div class="form-row">
-          <input type="text" class="flag-input" placeholder="NH{flag_text}" autocomplete="off" onkeydown="handleEnter(event, 1)">
-          <button type="button" class="submit-btn" onclick="verifyFlag(1)">Submit Flag</button>
-        </div>
-        <p class="feedback" id="feedback-1"></p>
-      </div>
+          <ul class="help-step-list">
+            <li>
+              <strong>Stage 1 :</strong> NH{public_osint_leak}
+            </li>
+            <li>
+              <strong>Stage 2 :</strong> NH{cipher_stream_decoded}
+            </li>
 
-      <!-- Challenge 2 -->
-      <div class="challenge-card locked" id="challenge-2" data-flag="NH{cipher_stream_decoded}">
-        <div class="card-header">
-          <div class="card-title-group">
-            <span class="stage-badge">Stage 02</span>
-            <h2 class="challenge-title">2. Hidden Messages & Decryption</h2>
-          </div>
-          <span class="status-label locked" id="status-2">Locked</span>
-        </div>
+            <li>
+              <strong>Stage 3 :</strong> NH{sql_bypass_prom_auth}
+            </li>
 
-        <p class="challenge-description">
-          Find and decode hidden cryptographic messages and strings in metadata.
-        </p>
+            <li>
+              <strong>Stage 4 :</strong> NH{pcap_exfiltrated_stream}
+            </li>
 
-        <details class="hint-box">
-          <summary>Need a hint?</summary>
-          <div class="hint-text">
-            Look for Base64 and rot13 encoded strings inside image metadata.
-          </div>
-        </details>
+            <li>
+              <strong>Stage 5 :</strong> NH{privesc_suid_root_access}
 
-        <div class="form-row">
-          <input type="text" class="flag-input" placeholder="Locked - Solve Challenge 1" disabled autocomplete="off" onkeydown="handleEnter(event, 2)">
-          <button type="button" class="submit-btn" disabled onclick="verifyFlag(2)">Submit Flag</button>
-        </div>
-        <p class="feedback" id="feedback-2"></p>
-      </div>
+            <li>
+              <strong>Stage 6 :</strong> NH{prometheus_core_vault_unlocked}
+            </li>
 
-      <!-- Challenge 3 -->
-      <div class="challenge-card locked" id="challenge-3" data-flag="NH{sql_bypass_prom_auth}">
-        <div class="card-header">
-          <div class="card-title-group">
-            <span class="stage-badge">Stage 03</span>
-            <h2 class="challenge-title">3. Vulnerable Web Portal</h2>
-          </div>
-          <span class="status-label locked" id="status-3">Locked</span>
+
+          </ul>
         </div>
 
-        <p class="challenge-description">
-          Test the authentication form of the staging portal for vulnerabilities.
-        </p>
-
-        <details class="hint-box">
-          <summary>Need a hint?</summary>
-          <div class="hint-text">
-            The login form uses string interpolation. Try a SQL injection payload.
+        <!-- Quick Commands Reference -->
+        <!-- <div class="intel-card">
+          <div class="intel-card-header">
+            <h3 class="intel-card-title">Quick Commands</h3>
           </div>
-        </details>
 
-        <div class="form-row">
-          <input type="text" class="flag-input" placeholder="Locked - Solve Challenge 2" disabled autocomplete="off" onkeydown="handleEnter(event, 3)">
-          <button type="button" class="submit-btn" disabled onclick="verifyFlag(3)">Submit Flag</button>
-        </div>
-        <p class="feedback" id="feedback-3"></p>
-      </div>
-
-      <!-- Challenge 4 -->
-      <div class="challenge-card locked" id="challenge-4" data-flag="NH{pcap_exfiltrated_stream}">
-        <div class="card-header">
-          <div class="card-title-group">
-            <span class="stage-badge">Stage 04</span>
-            <h2 class="challenge-title">4. Network Traffic & PCAP Forensics</h2>
+          <div class="intel-item">
+            <span class="intel-label">Test Web Connection</span>
+            <div class="intel-value">
+              <code>curl -I http://10.10.45.188:8080</code>
+            </div>
           </div>
-          <span class="status-label locked" id="status-4">Locked</span>
-        </div>
 
-        <p class="challenge-description">
-          Inspect network packets to locate leaked data sent over DNS or ICMP.
-        </p>
-
-        <details class="hint-box">
-          <summary>Need a hint?</summary>
-          <div class="hint-text">
-            Analyze unusual DNS queries and large ICMP payload packets in Wireshark.
+          <div class="intel-item">
+            <span class="intel-label">Base64 Decode</span>
+            <div class="intel-value">
+              <code>echo '...' | base64 -d</code>
+            </div>
           </div>
-        </details>
 
-        <div class="form-row">
-          <input type="text" class="flag-input" placeholder="Locked - Solve Challenge 3" disabled autocomplete="off" onkeydown="handleEnter(event, 4)">
-          <button type="button" class="submit-btn" disabled onclick="verifyFlag(4)">Submit Flag</button>
-        </div>
-        <p class="feedback" id="feedback-4"></p>
-      </div>
-
-      <!-- Challenge 5 -->
-      <div class="challenge-card locked" id="challenge-5" data-flag="NH{privesc_suid_root_access}">
-        <div class="card-header">
-          <div class="card-title-group">
-            <span class="stage-badge">Stage 05</span>
-            <h2 class="challenge-title">5. Protected Linux Host Escalation</h2>
+          <div class="intel-item">
+            <span class="intel-label">Find SUID Binaries</span>
+            <div class="intel-value">
+              <code>find / -perm -4000 2&gt;/dev/null</code>
+            </div>
           </div>
-          <span class="status-label locked" id="status-5">Locked</span>
-        </div>
+        </div> -->
 
-        <p class="challenge-description">
-          Escalate your privileges on the simulated Linux system to gain root access.
-        </p>
+      </aside>
 
-        <details class="hint-box">
-          <summary>Need a hint?</summary>
-          <div class="hint-text">
-            Search for binaries with unusual SUID permissions using <code>find / -perm -4000</code>.
+      <!-- Right Column: Challenges Stream -->
+      <div class="challenges-stream-column">
+
+        <!-- Notification Banner -->
+        <div id="status-bar" class="status-banner info" style="display: none;"></div>
+
+        <!-- Challenges List -->
+        <div class="challenges-list">
+
+          <!-- Challenge 1 -->
+          <div class="challenge-card" id="challenge-1" data-flag="NH{public_osint_leak}">
+            <div class="card-header">
+              <div class="card-title-group">
+                <span class="stage-badge">Stage 01</span>
+                <h2 class="challenge-title">1. OSINT & Public Intelligence</h2>
+              </div>
+              <span class="status-label active" id="status-1">Active</span>
+            </div>
+
+            <p class="challenge-description">
+              Inspect the company's public records or employee profiles for exposed initial access secrets.
+            </p>
+
+            <details class="hint-box">
+              <summary>Need a hint?</summary>
+              <div class="hint-text">
+                Check public repositories and commit logs for leaked keys or emails.
+              </div>
+            </details>
+
+            <div class="form-row">
+              <input type="text" class="flag-input" placeholder="NH{flag_text}" autocomplete="off"
+                onkeydown="handleEnter(event, 1)">
+              <button type="button" class="submit-btn" onclick="verifyFlag(1)">Submit Flag</button>
+            </div>
+            <p class="feedback" id="feedback-1"></p>
           </div>
-        </details>
 
-        <div class="form-row">
-          <input type="text" class="flag-input" placeholder="Locked - Solve Challenge 4" disabled autocomplete="off" onkeydown="handleEnter(event, 5)">
-          <button type="button" class="submit-btn" disabled onclick="verifyFlag(5)">Submit Flag</button>
-        </div>
-        <p class="feedback" id="feedback-5"></p>
-      </div>
+          <!-- Challenge 2 -->
+          <div class="challenge-card locked" id="challenge-2" data-flag="NH{cipher_stream_decoded}">
+            <div class="card-header">
+              <div class="card-title-group">
+                <span class="stage-badge">Stage 02</span>
+                <h2 class="challenge-title">2. Hidden Messages & Decryption</h2>
+              </div>
+              <span class="status-label locked" id="status-2">Locked</span>
+            </div>
 
-      <!-- Challenge 6 -->
-      <div class="challenge-card locked" id="challenge-6" data-flag="NH{prometheus_core_vault_unlocked}">
-        <div class="card-header">
-          <div class="card-title-group">
-            <span class="stage-badge">Stage 06</span>
-            <h2 class="challenge-title">6. Prometheus Vault Recovery</h2>
+            <p class="challenge-description">
+              Find and decode hidden cryptographic messages and strings in metadata.
+            </p>
+
+            <details class="hint-box">
+              <summary>Need a hint?</summary>
+              <div class="hint-text">
+                Look for Base64 and rot13 encoded strings inside image metadata.
+              </div>
+            </details>
+
+            <div class="form-row">
+              <input type="text" class="flag-input" placeholder="Locked - Solve Challenge 1" disabled autocomplete="off"
+                onkeydown="handleEnter(event, 2)">
+              <button type="button" class="submit-btn" disabled onclick="verifyFlag(2)">Submit Flag</button>
+            </div>
+            <p class="feedback" id="feedback-2"></p>
           </div>
-          <span class="status-label locked" id="status-6">Locked</span>
-        </div>
 
-        <p class="challenge-description">
-          Use the keys collected from previous stages to decrypt the final vault.
-        </p>
+          <!-- Challenge 3 -->
+          <div class="challenge-card locked" id="challenge-3" data-flag="NH{sql_bypass_prom_auth}">
+            <div class="card-header">
+              <div class="card-title-group">
+                <span class="stage-badge">Stage 03</span>
+                <h2 class="challenge-title">3. Vulnerable Web Portal</h2>
+              </div>
+              <span class="status-label locked" id="status-3">Locked</span>
+            </div>
 
-        <details class="hint-box">
-          <summary>Need a hint?</summary>
-          <div class="hint-text">
-            Combine the cipher key from Stage 2 with the root hash from Stage 5.
+            <p class="challenge-description">
+              Test the authentication form of the staging portal for vulnerabilities.
+            </p>
+
+            <details class="hint-box">
+              <summary>Need a hint?</summary>
+              <div class="hint-text">
+                The login form uses string interpolation. Try a SQL injection payload.
+              </div>
+            </details>
+
+            <div class="form-row">
+              <input type="text" class="flag-input" placeholder="Locked - Solve Challenge 2" disabled autocomplete="off"
+                onkeydown="handleEnter(event, 3)">
+              <button type="button" class="submit-btn" disabled onclick="verifyFlag(3)">Submit Flag</button>
+            </div>
+            <p class="feedback" id="feedback-3"></p>
           </div>
-        </details>
 
-        <div class="form-row">
-          <input type="text" class="flag-input" placeholder="Locked - Solve Challenge 5" disabled autocomplete="off" onkeydown="handleEnter(event, 6)">
-          <button type="button" class="submit-btn" disabled onclick="verifyFlag(6)">Submit Flag</button>
-        </div>
-        <p class="feedback" id="feedback-6"></p>
-      </div>
+          <!-- Challenge 4 -->
+          <div class="challenge-card locked" id="challenge-4" data-flag="NH{pcap_exfiltrated_stream}">
+            <div class="card-header">
+              <div class="card-title-group">
+                <span class="stage-badge">Stage 04</span>
+                <h2 class="challenge-title">4. Network Traffic & PCAP Forensics</h2>
+              </div>
+              <span class="status-label locked" id="status-4">Locked</span>
+            </div>
 
-      <!-- Finish CTF Card Section -->
-      <div class="challenge-card" id="finish-mission-card" style="background-color: #f0fdf4; border: 1px solid #bbf7d0; text-align: center; padding: 24px; margin-top: 10px;">
-        <h2 style="color: #15803d; font-size: 1.2rem; margin-bottom: 6px;">Finish Mission & View Standings</h2>
-        <p style="color: #475569; font-size: 0.95rem; margin-bottom: 16px;">
-          Completed your challenges or ready to submit? Click below to record your final completion time and check the live scoreboard rankings.
-        </p>
-        <div>
-          <button type="button" class="finish-btn" onclick="finishAndGoToScoreboard()" style="font-size: 0.95rem; padding: 11px 26px; cursor: pointer;">
-            Finish & View Scoreboard &rarr;
-          </button>
+            <p class="challenge-description">
+              Inspect network packets to locate leaked data sent over DNS or ICMP.
+            </p>
+
+            <details class="hint-box">
+              <summary>Need a hint?</summary>
+              <div class="hint-text">
+                Analyze unusual DNS queries and large ICMP payload packets in Wireshark.
+              </div>
+            </details>
+
+            <div class="form-row">
+              <input type="text" class="flag-input" placeholder="Locked - Solve Challenge 3" disabled autocomplete="off"
+                onkeydown="handleEnter(event, 4)">
+              <button type="button" class="submit-btn" disabled onclick="verifyFlag(4)">Submit Flag</button>
+            </div>
+            <p class="feedback" id="feedback-4"></p>
+          </div>
+
+          <!-- Challenge 5 -->
+          <div class="challenge-card locked" id="challenge-5" data-flag="NH{privesc_suid_root_access}">
+            <div class="card-header">
+              <div class="card-title-group">
+                <span class="stage-badge">Stage 05</span>
+                <h2 class="challenge-title">5. Protected Linux Host Escalation</h2>
+              </div>
+              <span class="status-label locked" id="status-5">Locked</span>
+            </div>
+
+            <p class="challenge-description">
+              Escalate your privileges on the simulated Linux system to gain root access.
+            </p>
+
+            <details class="hint-box">
+              <summary>Need a hint?</summary>
+              <div class="hint-text">
+                Search for binaries with unusual SUID permissions using <code>find / -perm -4000</code>.
+              </div>
+            </details>
+
+            <div class="form-row">
+              <input type="text" class="flag-input" placeholder="Locked - Solve Challenge 4" disabled autocomplete="off"
+                onkeydown="handleEnter(event, 5)">
+              <button type="button" class="submit-btn" disabled onclick="verifyFlag(5)">Submit Flag</button>
+            </div>
+            <p class="feedback" id="feedback-5"></p>
+          </div>
+
+          <!-- Challenge 6 -->
+          <div class="challenge-card locked" id="challenge-6" data-flag="NH{prometheus_core_vault_unlocked}">
+            <div class="card-header">
+              <div class="card-title-group">
+                <span class="stage-badge">Stage 06</span>
+                <h2 class="challenge-title">6. Prometheus Vault Recovery</h2>
+              </div>
+              <span class="status-label locked" id="status-6">Locked</span>
+            </div>
+
+            <p class="challenge-description">
+              Use the keys collected from previous stages to decrypt the final vault.
+            </p>
+
+            <details class="hint-box">
+              <summary>Need a hint?</summary>
+              <div class="hint-text">
+                Combine the cipher key from Stage 2 with the root hash from Stage 5.
+              </div>
+            </details>
+
+            <div class="form-row">
+              <input type="text" class="flag-input" placeholder="Locked - Solve Challenge 5" disabled autocomplete="off"
+                onkeydown="handleEnter(event, 6)">
+              <button type="button" class="submit-btn" disabled onclick="verifyFlag(6)">Submit Flag</button>
+            </div>
+            <p class="feedback" id="feedback-6"></p>
+          </div>
+
+          <!-- Finish CTF Card Section -->
+          <div class="challenge-card" id="finish-mission-card"
+            style="background-color: #f0fdf4; border: 1px solid #bbf7d0; text-align: center; padding: 24px; margin-top: 10px;">
+            <h2 style="color: #15803d; font-size: 1.2rem; margin-bottom: 6px;">Finish Mission & View Standings</h2>
+            <p style="color: #475569; font-size: 0.95rem; margin-bottom: 16px;">
+              Completed your challenges or ready to submit? Click below to record your final completion time and check
+              the live scoreboard rankings.
+            </p>
+            <div>
+              <button type="button" class="finish-btn" onclick="finishAndGoToScoreboard()"
+                style="font-size: 0.95rem; padding: 11px 26px; cursor: pointer;">
+                Finish & View Scoreboard &rarr;
+              </button>
+            </div>
+          </div>
+
         </div>
       </div>
 
@@ -275,7 +399,7 @@
     // Start Mission button click
     startBtn.addEventListener('click', () => {
       if (missionStarted) return;
-      
+
       missionStarted = true;
       startBtn.textContent = 'Mission Active';
       startBtn.classList.add('active');
@@ -350,7 +474,7 @@
         card.classList.remove('locked');
         card.classList.add('solved');
         input.disabled = true;
-        
+
         const btn = card.querySelector('.submit-btn');
         btn.disabled = true;
         btn.textContent = 'Solved';
@@ -366,20 +490,20 @@
         if (nextStepIndex <= totalChallenges) {
           const nextCard = document.getElementById(`challenge-${nextStepIndex}`);
           nextCard.classList.remove('locked');
-          
+
           const nextStatus = document.getElementById(`status-${nextStepIndex}`);
           nextStatus.className = 'status-label active';
           nextStatus.textContent = 'Active';
 
           const nextInput = nextCard.querySelector('.flag-input');
           const nextBtn = nextCard.querySelector('.submit-btn');
-          
+
           nextInput.disabled = false;
           nextInput.placeholder = 'NH{flag_text}';
           nextBtn.disabled = false;
 
           showBanner(`Stage 0${stepIndex} complete in ${timerClock.textContent}. Stage 0${nextStepIndex} is now unlocked.`, 'success');
-          
+
           setTimeout(() => {
             nextInput.focus();
             nextCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -417,4 +541,5 @@
     }
   </script>
 </body>
+
 </html>

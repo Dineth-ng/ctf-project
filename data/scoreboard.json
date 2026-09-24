@@ -20,14 +20,17 @@
     },
     {
       "team_name": "Utto",
-      "total_score": 2000,
-      "completed_count": 0,
-      "total_time": "00:00:00",
-      "total_seconds": 0,
+      "total_score": 2250,
+      "completed_count": 2,
+      "total_time": "00:00:17",
+      "total_seconds": 17,
       "is_finished": false,
-      "stage_times": {},
+      "stage_times": {
+        "1": "00:00:23",
+        "2": "00:00:17"
+      },
       "registered_at": "2026-09-24T22:17:57.026342",
-      "last_updated": "2026-09-24T22:17:57.026348"
+      "last_updated": "2026-09-24T22:52:34.669371"
     }
   ]
 }

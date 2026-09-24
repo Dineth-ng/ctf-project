@@ -37,7 +37,7 @@
           <span class="stage-badge">Live Rankings</span>
           <h1>CTF Mission Scoreboard</h1>
           <p class="subtitle" style="margin-bottom: 0; padding-bottom: 0; border-bottom: none;">
-            Live team standings, challenges solved, elapsed duration, and last submission time.
+            Live team standings, challenges solved, and total completion time.
           </p>
         </div>
 
@@ -70,15 +70,14 @@
           <tr>
             <th style="width: 80px;">Rank</th>
             <th>Team Name</th>
-            <th style="width: 120px;">Solved</th>
-            <th style="width: 130px;">Score</th>
-            <th style="width: 140px;">Total Time</th>
-            <th style="width: 160px;">Last Submit Time</th>
+            <th style="width: 140px;">Solved</th>
+            <th style="width: 140px;">Score</th>
+            <th style="width: 160px;">Total Time</th>
           </tr>
         </thead>
         <tbody id="scoreboard-body">
           <tr>
-            <td colspan="6" style="text-align: center; padding: 25px; color: #64748b;">
+            <td colspan="5" style="text-align: center; padding: 25px; color: #64748b;">
               Loading leaderboard rankings...
             </td>
           </tr>
@@ -115,7 +114,7 @@
         if (teams.length === 0) {
           tbody.innerHTML = `
             <tr>
-              <td colspan="6" style="text-align: center; padding: 35px; color: #64748b;">
+              <td colspan="5" style="text-align: center; padding: 35px; color: #64748b;">
                 No teams have registered or submitted flags yet. <br>
                 <a href="index.html" style="color: #2563eb; font-weight: 600; text-decoration: none; margin-top: 8px; display: inline-block;">
                   Start the CTF to be #1 on the scoreboard!
@@ -138,17 +137,6 @@
           const isDone = team.completed_count >= 6;
           const statusClass = isDone ? 'solved-tag' : 'progress-tag';
 
-          // Format last submit time
-          let lastTimeFormatted = '--:--';
-          if (team.last_updated) {
-            try {
-              const d = new Date(team.last_updated);
-              lastTimeFormatted = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-            } catch (e) {
-              lastTimeFormatted = team.total_time || '--:--';
-            }
-          }
-
           rowsHtml += `
             <tr>
               <td class="rank-cell">
@@ -169,9 +157,6 @@
               <td class="time-cell">
                 <code>${team.total_time || '00:00:00'}</code>
               </td>
-              <td class="time-cell">
-                <code>${lastTimeFormatted}</code>
-              </td>
             </tr>
           `;
         });
@@ -182,7 +167,7 @@
         console.error('Error fetching scoreboard:', err);
         tbody.innerHTML = `
           <tr>
-            <td colspan="6" style="text-align: center; padding: 25px; color: #dc2626;">
+            <td colspan="5" style="text-align: center; padding: 25px; color: #dc2626;">
               Unable to load live scoreboard. (Server offline).
             </td>
           </tr>

@@ -65,12 +65,36 @@ def save_scoreboard(data: dict):
 
 # Challenge Stages & Flags
 CHALLENGES = {
-    1: {"title": "OSINT & Public Intelligence", "flag": "NH{public_osint_leak}", "points": 100},
-    2: {"title": "Hidden Messages & Decryption", "flag": "NH{cipher_stream_decoded}", "points": 150},
-    3: {"title": "Vulnerable Web Portal", "flag": "NH{sql_bypass_prom_auth}", "points": 200},
-    4: {"title": "Network Traffic & PCAP Forensics", "flag": "NH{pcap_exfiltrated_stream}", "points": 250},
-    5: {"title": "Protected Linux Host Escalation", "flag": "NH{privesc_suid_root_access}", "points": 300},
-    6: {"title": "Prometheus Vault Recovery", "flag": "NH{prometheus_core_vault_unlocked}", "points": 500}
+    1: {
+        "title": "OSINT & Public Intelligence", 
+        "flag": "NH{public_osint_leak}", 
+        "points": 100
+        },
+    2: {
+        "title": "Hidden Messages & Decryption", 
+        "flag": "NH{cipher_stream_decoded}", 
+        "points": 150
+        },
+    3: {
+        "title": "Vulnerable Web Portal", 
+        "flag": "NH{sql_bypass_prom_auth}", 
+        "points": 200
+        },
+    4: {
+        "title": "Network Traffic & PCAP Forensics", 
+        "flag": "NH{pcap_exfiltrated_stream}", 
+        "points": 250
+        },
+    5: {
+        "title": "Protected Linux Host Escalation", 
+        "flag": "NH{privesc_suid_root_access}", 
+        "points": 300
+        },
+    6: {
+        "title": "Prometheus Vault Recovery", 
+        "flag": "NH{prometheus_core_vault_unlocked}", 
+        "points": 500
+        }
 }
 
 class TeamStartRequest(BaseModel):
